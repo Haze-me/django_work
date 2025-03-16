@@ -1,0 +1,83 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<body class="about-page">
+    <main class="main">  
+
+ <!-- Page Title -->
+ <div class="page-title">
+    <div class="container d-lg-flex justify-content-between align-items-center">
+      <h1 class="mb-2 mb-lg-0">Register</h1>
+      <nav class="breadcrumbs">
+        <ol>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li class="current">Login or Sign-up</li>
+        </ol>
+      </nav>
+    </div>
+  </div><!-- End Page Title -->
+
+<div class="container d-flex justify-content-center align-items-center vh-50 mt-3 mb-5">
+    <div class="card shadow-lg p-4 rounded-4" style="max-width: 500px; width: 100%;">
+        <h2 class="text-center mb-4">Join Us Today!</h2>
+        
+        <form method="POST" action="" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <!-- Display form errors -->
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>Oops!</strong> Please fix the errors below.
+                    <ul>
+                        {% for field in form %}
+                            {% if field.errors %}
+                                <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+            <!-- Render form fields with Bootstrap styles -->
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                {{ form.username }}
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                {{ form.email }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">First Name</label>
+                {{ form.first_name }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                {{ form.last_name }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                {{ form.password1 }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Confirm Password</label>
+                {{ form.password2 }}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+
+            <div class="text-center mt-3">
+                <small>Already have an account? <a href="{% url 'login' %}">Login here</a></small>
+            </div>
+        </form>
+    </div>
+</div>
+    </main>
+</body>
+
+{% endblock %}
